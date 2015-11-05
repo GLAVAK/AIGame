@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <!--Css styles-->
+    <link href="~/Content/css/style.css?@DateTime.Now.Ticks.ToString()" rel="stylesheet" type="text/css">
+
+    <!--Icon font awesome-->
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!--Web font-->
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+    <!--JQuery-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="~/Content/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/js/main.js?@DateTime.Now.Ticks.ToString()"></script>
+
+    <title>Game</title>
+</head>
+
+<body>
+
+<div id="hexMenu">
+    <div class="row1">
+        <a href="#" id="buttonCodeEditor" class="hexButton" title="Code editor"><i class="fa fa-code"></i></a>
+        <a href="#" id="buttonRadar" class="hexButton" title="Radar"><i class="fa fa-wifi"></i></a>
+    </div>
+    <div style="clear:both"></div>
+    <div class="row2">
+        <a href="#" id="buttonLog" class="hexButton" title="Log"></a>
+        <a href="#" id="buttonConsole" class="hexButton" title="Console"><i class="fa fa-terminal"></i></a>
+    </div>
+</div>
+
+<div id="ship" style="display: none;">
+    <div class="outcomingContainer"></div>
+
+    <div class="weaponContainer"></div>
+    <img class="shipBackground" src="">
+    <img class="shipLayout" src="">
+    <div class="roomSystemsContainer"></div>
+    
+    <div class="incomingContainer"></div>
+</div>
+
+<div id="message">
+    <p></p>
+    <input type="text" name="login" id="login" placeholder="Login" value="Ggg1" />
+    <input type="password" name="password" id="password" placeholder="Password" value="123321" />
+    <input type="submit" name="loginButton" id="loginButton" value="Login" style="margin-left: 20px;" />
+    <input type="submit" name="registerButton" id="registerButton" value="Register" />
+</div>
+
+<div id="register" class="window" style="display: none;">
+    <p></p>
+    <input type="text" name="login" id="login" placeholder="Login" /><br>
+    <input type="password" name="password" id="password" placeholder="Password" />
+    <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="Password again" />
+    <input type="submit" name="registerButton" id="registerButton" value="Register" />
+    <input type="submit" name="cancelButton" id="cancelButton" value="Cancel" />
+</div>
+
+<div id="codeEditorWindow" class="window" style="display: none;">
+    <h3>Code editor</h3>
+    <textarea></textarea>
+    <a id="sendCode" href="#">send</a>
+</div>
+
+<div id="radarWindow" class="window right" style="display: none;">
+    <h3>Radar view</h3>
+    <h4>No data</h4>
+    <div id="enemyShip" style="display:none">
+        <div class="outcomingContainer"></div>
+
+        <div class="weaponContainer"></div>
+        <img class="shipBackground" src="">
+        <img class="shipLayout" src="">
+        <div class="roomSystemsContainer"></div>
+
+        <div class="incomingContainer"></div>
+    </div>
+</div>
+
+<div id="logWindow" class="window" style="display: none;">
+    <h3>Log view</h3>
+    <div>
+    </div>
+</div>
+
+<div id="consoleWindow" class="window" style="display: none;">
+    <h3>Console</h3>
+    <div>
+    </div>
+    <input type="text" name="command">
+    <a href="#">send</a>
+</div>
+
+<div id="toolTip" style="display: none;">
+
+</div>
+
+<div id="jumpAnimation" style="opacity:0"></div>
+
+</body>
+</html>

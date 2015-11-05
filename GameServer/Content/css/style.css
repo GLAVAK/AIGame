@@ -1,0 +1,241 @@
+html
+{
+	min-height: 768px;
+	min-width: 1366px;
+
+	height: 100%;
+}
+
+body
+{
+	background: #040a15;
+	font-family: 'PT Sans', sans-serif;
+
+	min-height: 768px;
+	min-width: 1366px;
+	position: relative;
+	margin: 0;
+
+	height: 100%;
+}
+
+#ship, #enemyShip
+{
+	padding: 0;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+#ship img, #enemyShip img, .weaponContainer
+{
+	position: absolute;
+	margin: 0;
+}
+
+.roomSystemsContainer img, .roomSystemsContainer
+{
+	position: absolute;
+	margin: 0;
+
+	pointer-events: none;
+}
+
+.window, #message
+{
+	background: url("../img/codeEditorBackground.png");
+	padding: 18px 15px 26px 22px;
+
+	position: absolute;
+	top: 50%;
+	left: 25px;
+
+	width: 444px;
+	height: 722px;
+	margin-top: -381px;
+}
+
+.window.right
+{
+	right: 25px;
+	left: auto;
+}
+
+#message
+{
+	background: url("../img/messageBackground.png");
+	padding: 30px;
+
+	color: #FFF;
+	font-weight: bold;
+
+	left: 50%;
+
+	width: 254px;
+	height: 166px;
+	margin-top: -113px;
+	margin-left: -157px;
+}
+
+#hexMenu 
+{
+    position: absolute;
+    z-index: 100;
+    right: 30px;
+}
+
+#hexMenu .row2
+{
+	position: relative;
+	top: -14px;
+	left: 25px;
+}
+
+.hexButton
+{
+	background: url("../img/hexButton.png");
+
+	display: block;
+	float: left;
+	width: 53px;
+	height: 57px;
+	margin: 0;
+	margin-left: -3px;
+
+	color: #FFF;
+	text-align: center;
+	line-height: 57px;
+}
+
+#register
+{
+	left: 50%;
+}
+
+input
+{
+	background: #171814;
+	border: 1px solid #e6db74;
+	color: #FFF;
+
+	margin: 8px;
+	padding: 8px;
+}
+
+#message p
+{
+	margin: 3px 8px;
+	color: red;
+}
+
+.window h3
+{
+	color: #fffec8;
+	text-transform: uppercase;
+	font-size: 20px;
+
+	margin: 0 8px;
+	padding: 1px;
+}
+
+.window h4
+{
+	color: #fffec8;
+	font-size: 17px;
+
+	margin: 0 8px;
+	padding: 1px;
+
+	text-align: center;
+}
+
+#toolTip
+{
+	background: rgba(100,50,50,.8);
+	color: #FFF;
+
+	padding: 5px;
+	margin-left: 15px;
+	margin-top: 15px;
+	position: absolute;
+
+	pointer-events: none;
+	cursor: default;
+}
+
+#toolTip.friendly
+{
+	background: rgba(50,100,50,.8);
+}
+
+#codeEditorWindow textarea
+{
+	outline: none;
+	background: transparent;
+	color: #FFF;
+	resize: none;
+	overflow: auto;
+
+	width: 443px;
+	height: 650px;
+
+	border: none;
+	/*border: 1px solid red;*/
+}
+
+#consoleWindow div
+{
+	overflow: auto;
+	height: 615px;	
+}
+
+#consoleWindow div p
+{
+	color: #FFF;
+	font-size: 14px;
+	margin: 0;
+	padding: 2px 6px;
+	border-top: 1px solid rgba(100,100,100,.5);
+}
+
+#consoleWindow a
+{
+	color: white;
+}
+
+p.error
+{
+	color: red;
+}
+
+#consoleWindow div p:nth-child(odd)
+{
+	background-color: rgba(150,100,100,.2);
+}
+
+#consoleWindow div p:hover
+{
+	background-color: rgba(100,100,150,.2);
+}
+
+#sendCode
+{
+	color: #FFF;
+
+	position: absolute;
+	right: 30px;
+	bottom: 30px;
+}
+
+#jumpAnimation
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	z-index: 500;
+
+	pointer-events: none;
+	cursor: default;
+}
