@@ -16,6 +16,7 @@ namespace GameServer.GameLogic.JSClasses
     {
         protected Ship parent;
         public int roomId;
+        public bool isYours = true;
 
         public CellStatus status;
 
@@ -29,6 +30,8 @@ namespace GameServer.GameLogic.JSClasses
         public int StepsToReady { get { return status.stepsToReady; } }
 
         [JSProperty(Name = "type", IsConfigurable = false)]
+        public virtual int getIntType { get { return (int)this.type; } }
+
         public virtual CellTypesEnum type
         {
             get { return CellTypesEnum.NoSystem; }
@@ -37,6 +40,7 @@ namespace GameServer.GameLogic.JSClasses
         [JSFunction(Name = "power")]
         public virtual int Power(int energy)
         {
+            if (!isYours) throw new Exception("trying to manipulate enemy cell");
             int deltaEnergy = energy - status.energy;
             parent.useEnergy(deltaEnergy);
             status.energy = energy;
@@ -60,6 +64,11 @@ namespace GameServer.GameLogic.JSClasses
                 if (status.stepsToReady < 0) status.stepsToReady = 0;
                 status.stepMade = true;
             }
+        }
+
+        public virtual Cell copyCell()
+        {
+            return new Cell(parent, roomId) { status = this.status, isYours = false };
         }
     }
 }

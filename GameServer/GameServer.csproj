@@ -183,6 +183,7 @@
     <Compile Include="DataEntities\Weapon.cs" />
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="GameLogic\CellTypesEnum.cs" />
+    <Compile Include="GameLogic\Radar.cs" />
     <Compile Include="Infrastructure\SecurityHelper.cs" />
     <Compile Include="JSONConverters\CellJsonConverter.cs" />
     <Compile Include="GameLogic\JSClasses\CellEngine.cs" />
@@ -204,7 +205,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\img\codeEditorBackground.png" />
     <Content Include="Content\img\hexButton.png" />
     <Content Include="Content\img\messageBackground.png" />
@@ -219,6 +222,10 @@
     <Content Include="Content\js\main.js" />
     <Content Include="Global.asax" />
     <Content Include="ConnectionStrings.config" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\AiGame - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\AiGame - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />

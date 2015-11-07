@@ -8,7 +8,7 @@ $(document).ready(function (){
 		$.ajax({
 			url: "/api/code",
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			data: "Code="+$("#codeEditorWindow textarea").val(),
+			data: "Code="+$("#codeEditorWindow textarea").val().replace(/\+/g, "%2B"),
 			type: "POST",
 			success: function (data){
 			},
@@ -121,7 +121,7 @@ $(document).ready(function (){
 		$.ajax({
 			url: "/api/code/console",
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			data: "Code="+$("#consoleWindow input").val(),
+			data: "Code="+$("#consoleWindow input").val().replace(/\+/g, "%2B"),
 			type: "POST",
 			success: function (data){
 				$("#consoleWindow input").val("");
@@ -130,8 +130,6 @@ $(document).ready(function (){
 		});
 		return false;
 	});
-
-	setUpTaskBar();
 });
 
 function setUpTaskBar()
@@ -183,6 +181,8 @@ function startGame()
 	});
 
 	updatesInterval = setInterval(getUpdates, 1000);
+
+	setUpTaskBar();
 }
 
 function terminate(errorMessage)
@@ -437,7 +437,34 @@ function shootRocket(fromCoords, toCoords, incoming)
 		}, 500, "easeInSine", function(){
 			$("#obj"+missileId).remove();
 
-			// TODO: add explosion
+			 spawnExplosion(toCoords[0], toCoords[1], !incoming);
 		});
 	});
-}	
+}
+
+function spawnExplosion(x, y, incoming)
+{
+	var missileId = nextObjectId++;
+
+	$((incoming ? '#enemyShip' : '#ship') + ' .incomingContainer')
+		.prepend('<div id="obj' + missileId + '" class="explosion"></div>');
+
+	$("#obj"+missileId).css({
+		"position":"absolute"
+		,"left":x+"px"
+		,"top":y+"px"
+		,"width":"0px"
+		,"height":"0px"
+		,"border-radius":"25px"
+		,"opacity":"0.6"
+	}).animate({
+			"left":x-50+"px"
+			,"top":y-50+"px"
+			,"width":"100px"
+			,"height":"100px"
+			,"border-radius":"50px"
+			,"opacity":"0.1"
+		}, 500, "easeInSine", function(){
+			$("#obj"+missileId).remove();
+		});
+}

@@ -15,12 +15,25 @@ namespace GameServer.GameLogic.JSClasses
             get { return CellTypesEnum.Weapon; }
         }
 
+        [JSProperty(Name = "type", IsConfigurable = false)]
+        public override int getIntType { get { return base.getIntType; } }
+
         [JSProperty(Name = "weaponId", IsConfigurable = false)]
         public int weaponId { get; set; }
+
+        [JSProperty(Name = "health", IsConfigurable = false)]
+        public int Health { get { return status.health; } }
+
+        [JSProperty(Name = "energy", IsConfigurable = false)]
+        public int Energy { get { return status.energy; } }
+
+        [JSProperty(Name = "stepsToReady", IsConfigurable = false)]
+        public int StepsToReady { get { return status.stepsToReady; } }
 
         [JSFunction(Name = "shoot")]
         public int Shoot(double x, double y)
         {
+            if (!isYours) throw new Exception("trying to manipulate enemy cell");
             Ship enemyShip = this.parent.owner.enemyShip;
             if (enemyShip != null && status.stepsToReady == 0)
             {
@@ -46,6 +59,11 @@ namespace GameServer.GameLogic.JSClasses
             : base(parent, roomId)
         {
             weaponId = 0;
+        }
+
+        public override Cell copyCell()
+        {
+            return new CellWeapon(parent, roomId) { status = this.status, isYours = false };
         }
     }
 }

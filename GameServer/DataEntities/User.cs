@@ -1,5 +1,8 @@
 ﻿using DataBase;
+using GameServer.Abstract;
+using GameServer.GameLogic.JSClasses;
 using Jurassic;
+using Jurassic.Library;
 using System.Collections.Generic;
 
 namespace GameServer.DataEntities
@@ -7,6 +10,7 @@ namespace GameServer.DataEntities
     public class User
     {
         private DBUser dbEntry;
+        public IUserRepository repository;
 
         public int UserId
         {
@@ -65,13 +69,38 @@ namespace GameServer.DataEntities
         public Ship ship;
         public ScriptEngine engine;
 
-        public Ship enemyShip;
+        public Ship enemyShip
+        {
+            get { return _enemyShip; }
+            set
+            {
+                _enemyShip = value;
+
+                //Form array of Cells to be used in JavaScript
+                /*ArrayInstance[] array = new ArrayInstance[ship.cells.Length];
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i] = engine.Array.New(ship.cells[i]);
+
+                    for (int j = 0; j < ship.cells[i].Length; j++)
+                    {
+                        if (ship.cells[i][j] is CellEngine)
+                        {
+                            ((CellEngine)ship.cells[i][j]).repository = repository;
+                        }
+                    }
+                }
+                engine.SetGlobalValue("enemyCells", engine.Array.New(array));*/
+            }
+        }
+        private Ship _enemyShip;
 
         public List<Event> Events = new List<Event>();
 
-        public User(DBUser dbEntry)
+        public User(DBUser dbEntry, IUserRepository repository)
         {
             this.dbEntry = dbEntry;
+            this.repository = repository;
 
             engine = new ScriptEngine();
             engine.ForceStrictMode = true;

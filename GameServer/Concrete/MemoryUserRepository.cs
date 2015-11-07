@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using GameServer.Abstract;
 using GameServer.DataEntities;
+using GameServer.GameLogic;
 using GameServer.GameLogic.JSClasses;
 using Jurassic.Library;
 using System;
@@ -57,7 +58,7 @@ namespace GameServer.Concrete
         /// <param name="dbUser"></param>
         public void addUserFromDB(DBUser dbUser)
         {
-            User user = new User(dbUser);
+            User user = new User(dbUser, this);
 
             Ship ship = new ShipBuilder().BuildShip(user,
                 new PresetShipRepository().GetShip(dbUser.ShipPresetId),
@@ -78,6 +79,7 @@ namespace GameServer.Concrete
                 }
             }
             user.engine.SetGlobalValue("cells", user.engine.Array.New(array));
+            user.engine.SetGlobalValue("radar", new Radar(user));
 
             Action<string> logAction = delegate(string s) { user.Log.Add(s); };
             user.engine.SetGlobalFunction("log", logAction);

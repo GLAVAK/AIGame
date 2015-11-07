@@ -44,7 +44,7 @@ namespace GameServer.Controllers
             User currentUser = helper.GetCurrentUser(HttpContext.Current.Session["UserId"]);
             if (currentUser == null) return false;
 
-            currentUser.Code = submitCodeModel.Code;
+            currentUser.Code = submitCodeModel.Code.Replace("%2B", "+");
             context.SaveChanges();
 
             return true;
@@ -57,7 +57,7 @@ namespace GameServer.Controllers
             User currentUser = helper.GetCurrentUser(HttpContext.Current.Session["UserId"]);
             if (currentUser == null) return false;
 
-            currentUser.consoleCommand += submitCodeModel.Code + "\n";
+            currentUser.consoleCommand += submitCodeModel.Code.Replace("%2B", "+") + "\n";
 
             return true;
         }
