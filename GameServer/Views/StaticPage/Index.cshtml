@@ -59,7 +59,7 @@
     <input type="submit" name="registerButton" id="registerButton" value="Register" />
 </div>
 
-<div id="register" class="window" style="display: none;">
+<div id="register" class="window" style="display:none;">
     <p></p>
     <input type="text" name="login" id="login" placeholder="Login" /><br>
     <input type="password" name="password" id="password" placeholder="Password" />
@@ -68,13 +68,13 @@
     <input type="submit" name="cancelButton" id="cancelButton" value="Cancel" />
 </div>
 
-<div id="codeEditorWindow" class="window" style="display: none;">
+<div id="codeEditorWindow" class="window" style="display:none;">
     <h3>Code editor</h3>
     <textarea></textarea>
     <a id="sendCode" href="#">send</a>
 </div>
 
-<div id="radarWindow" class="window right" style="display: none;">
+<div id="radarWindow" class="window right" style="display:none;">
     <h3>Radar view</h3>
     <h4>No data</h4>
     <div id="enemyShip" style="display:none">
@@ -89,13 +89,13 @@
     </div>
 </div>
 
-<div id="logWindow" class="window" style="display: none;">
+<div id="logWindow" class="window" style="display:none;">
     <h3>Log view</h3>
     <div>
     </div>
 </div>
 
-<div id="consoleWindow" class="window" style="display: none;">
+<div id="consoleWindow" class="window" style="display:none;">
     <h3>Console</h3>
     <div>
     </div>
@@ -103,11 +103,18 @@
     <a href="#">send</a>
 </div>
 
-<div id="toolTip" style="display: none;">
+<div id="toolTip" style="display:none;">
 
 </div>
 
 <div id="jumpAnimation" style="opacity:0"></div>
+
+<div id="deadMessage" style="display:none">
+    <div class="message">
+        <p>You ship is destroyed</p>
+        <button id="repairButton">Repair</button>
+    </div>
+</div>
 
 </body>
 </html>

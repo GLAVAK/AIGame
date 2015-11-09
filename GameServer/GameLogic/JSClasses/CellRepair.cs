@@ -8,18 +8,18 @@ using System.Web;
 
 namespace GameServer.GameLogic.JSClasses
 {
-    public class CellWeapon : Cell
+    public class CellRepair : Cell
     {
         public override CellTypesEnum type
         {
-            get { return CellTypesEnum.Weapon; }
+            get { return CellTypesEnum.Repair; }
         }
 
         [JSProperty(Name = "type", IsConfigurable = false)]
         public override int getIntType { get { return base.getIntType; } }
 
         [JSProperty(Name = "weaponId", IsConfigurable = false)]
-        public  int weaponId { get; set; }
+        public int weaponId { get; set; }
 
         [JSProperty(Name = "health", IsConfigurable = false)]
         public override int Health { get { return status.health; } }
@@ -30,20 +30,14 @@ namespace GameServer.GameLogic.JSClasses
         [JSProperty(Name = "stepsToReady", IsConfigurable = false)]
         public override int StepsToReady { get { return status.stepsToReady; } }
 
-        [JSFunction(Name = "shoot")]
-        public int Shoot(int x, int y)
+        [JSFunction(Name = "repair")]
+        public int Repair(int x, int y)
         {
             if (!isYours) throw new Exception("trying to manipulate enemy cell");
-            Ship enemyShip = this.parent.owner.enemyShip;
-            if (enemyShip != null && status.stepsToReady == 0)
-            {
-                this.parent.owner.Events.Add(
-                    new Event("shoot", new string[] { x.ToString(), y.ToString(), this.weaponId.ToString() }));
-                enemyShip.owner.Events.Add(
-                    new Event("shootIncoming", new string[] { x.ToString(), y.ToString(), this.weaponId.ToString() }));
 
-                Cell target = this.parent.owner.enemyShip.cells[y][x];
-                if (target.Health > 0) target.status.health--;
+            if (status.stepsToReady == 0 && this.parent.cells[y][x].Health < 10)
+            {
+                this.parent.cells[y][x].status.health++;
 
                 status.stepsToReady = 5;
             }
@@ -57,15 +51,12 @@ namespace GameServer.GameLogic.JSClasses
             return base.Power(energy);
         }
 
-        public CellWeapon(Ship parent, int roomId)
-            : base(parent, roomId)
-        {
-            weaponId = 0;
-        }
+        public CellRepair(Ship parent, int roomId)
+            : base(parent, roomId) { }
 
         public override Cell copyCell()
         {
-            return new CellWeapon(parent, roomId) { status = this.status, isYours = false };
+            return new CellRepair(parent, roomId) { status = this.status, isYours = false };
         }
     }
 }

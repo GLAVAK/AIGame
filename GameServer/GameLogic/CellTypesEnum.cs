@@ -10,6 +10,7 @@ namespace GameServer.GameLogic
         NoCell = 0,
         NoSystem = 1,
         Weapon = 2,
-        Engine = 3
+        Engine = 3,
+        Repair = 4
     }
 }

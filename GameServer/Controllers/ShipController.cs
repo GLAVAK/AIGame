@@ -28,6 +28,18 @@ namespace GameServer.Controllers
             return currentUser.ship;
         }
 
+        [HttpPost]
+        [ActionName("Repair")]
+        public bool RepairShip()
+        {
+            User currentUser = helper.GetCurrentUser(HttpContext.Current.Session["UserId"]);
+            if (currentUser == null) return false;
+
+            currentUser.ship.Repair();
+
+            return true;
+        }
+
         [HttpGet]
         [ActionName("enemyShip")]
         public Ship GetEnemyShip()

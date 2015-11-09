@@ -47,5 +47,22 @@ namespace GameServer.DataEntities
 
             energyRemain -= amount;
         }
+
+        public bool IsBroken()
+        {
+            for (int i = 0; i < cells.Length; i++)
+                for (int j = 0; j < cells[i].Length; j++)
+                    if (cells[i][j].Health > 0) return false;
+            return true;
+        }
+
+        public void Repair()
+        {
+            for (int i = 0; i < cells.Length; i++)
+                for (int j = 0; j < cells[i].Length; j++)
+                    if (!(cells[i][j] is CellEmpty)) cells[i][j].status.health = 10;
+
+            owner.IsDead = false;
+        }
     }
 }

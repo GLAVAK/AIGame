@@ -12,6 +12,8 @@ namespace GameServer.Models.ResponseData
         public RadarType RadarType { get; set; }
         public object RadarData { get; set; }
 
+        public bool IsDead { get; set; }
+
         public UpdateData()
         {
             RadarType = ResponseData.RadarType.Nothing;

@@ -41,6 +41,7 @@ namespace GameServer.Controllers
             if (user != null)
             {
                 HttpContext.Current.Session["UserId"] = user.UserId;
+                user.Events.Clear();
                 return new { success = true };
             }
             else

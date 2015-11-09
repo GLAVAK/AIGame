@@ -88,6 +88,8 @@ namespace GameServer.Concrete
                     return new CellWeapon(parent, roomId) { weaponId = assignedWeaponIds[roomId] };
                 case 3:
                     return new CellEngine(parent, roomId);
+                case 4:
+                    return new CellRepair(parent, roomId);
                 default:
                     return new CellEmpty(parent);
             }

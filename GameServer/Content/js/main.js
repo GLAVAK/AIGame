@@ -10,11 +10,27 @@ $(document).ready(function (){
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			data: "Code="+$("#codeEditorWindow textarea").val().replace(/\+/g, "%2B"),
 			type: "POST",
-			success: function (data){
-			},
+			success: function (data) { },
 			error: function () { terminate(); }
 		});
 		return false;
+	});
+
+	$('#codeEditorWindow textarea').on('keydown', function (e) {
+	    var keyCode = e.keyCode || e.which;
+
+	    if (keyCode === 9) {
+			e.preventDefault();
+			var start = this.selectionStart;
+			var end = this.selectionEnd;
+			var val = this.value;
+			var selected = val.substring(start, end);
+			var re = /^/gm;
+
+			this.value = val.substring(0, start) + selected.replace(re, '    ') + val.substring(end);
+			this.selectionStart = end + 4;
+			this.selectionEnd = end + 4;
+	    }
 	});
 
 	$('.shipLayout').mousemove(function(event) {
@@ -130,6 +146,15 @@ $(document).ready(function (){
 		});
 		return false;
 	});
+
+	$('#repairButton').click(function (){
+		$.ajax({
+			url: "/api/ship/repair",
+			type: "POST",
+			error: function () { terminate(); }
+		});
+		return false;
+	});
 });
 
 function setUpTaskBar()
@@ -188,7 +213,7 @@ function startGame()
 function terminate(errorMessage)
 {
 	errorMessage = errorMessage || "Connection lost, please, refresh the page";
-	$('#ship, .window').remove();
+	$('#ship, .window, #deadMessage').remove();
 	$('#message').show();
 	$('#message').text(errorMessage);
 	clearInterval(updatesInterval);
@@ -269,6 +294,15 @@ function getUpdates()
 					data.Log[i] = data.Log[i].slice(1);
 				}*/
 				$('#consoleWindow div').append('<p class="'+classes+'"">'+data.Log[i]+"</p>");
+			}
+
+			if(data.IsDead)
+			{
+				$('#deadMessage').show();
+			}
+			else
+			{
+				$('#deadMessage').hide();
 			}
 		},
 		error: function () { terminate(); }
@@ -354,6 +388,7 @@ function updateRoomSystems(yourShip)
 				{
 					case 2: systemName="Weapon"; break;
 					case 3: systemName="Engine"; break;
+					case 4: systemName="Repair"; break;
 				}
 				$('#'+so.elementId+' .roomSystemsContainer').append(
 					'<img src="/content/img/system'+systemName+'.png" id="system'+so.elementId+i+'-'+j+'">');

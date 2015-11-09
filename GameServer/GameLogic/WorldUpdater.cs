@@ -20,21 +20,29 @@ namespace GameServer.GameLogic
         {
             foreach (User user in repository.Users)
             {
-                user.ship.makeStep();
-                try
+                if (!user.IsDead)
                 {
-                    user.engine.Execute(user.Code);
-                    if (user.consoleCommand != null)
+                    user.ship.makeStep();
+                    try
                     {
-                        user.engine.Execute(user.consoleCommand);
+                        user.engine.Execute(user.Code);
+                        if (user.consoleCommand != null)
+                        {
+                            user.engine.Execute(user.consoleCommand);
+                            user.consoleCommand = null;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        user.Log.Add("Exception while executing your code: " + ex.Message);
                         user.consoleCommand = null;
                     }
                 }
-                catch(Exception ex)
-                {
-                    user.Log.Add("Exception while executing your code: " + ex.Message);
-                    user.consoleCommand = null;
-                }
+            }
+
+            foreach (User user in repository.Users)
+            {
+                if (user.ship.IsBroken()) user.IsDead = true;
             }
         }
     }

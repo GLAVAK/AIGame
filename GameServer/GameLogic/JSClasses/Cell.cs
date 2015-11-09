@@ -21,13 +21,13 @@ namespace GameServer.GameLogic.JSClasses
         public CellStatus status;
 
         [JSProperty(Name = "health", IsConfigurable = false)]
-        public int Health { get { return status.health; } }
+        public virtual int Health { get { return status.health; } }
 
         [JSProperty(Name = "energy", IsConfigurable = false)]
-        public int Energy { get { return status.energy; } }
+        public virtual int Energy { get { return status.energy; } }
 
         [JSProperty(Name = "stepsToReady", IsConfigurable = false)]
-        public int StepsToReady { get { return status.stepsToReady; } }
+        public virtual int StepsToReady { get { return status.stepsToReady; } }
 
         [JSProperty(Name = "type", IsConfigurable = false)]
         public virtual int getIntType { get { return (int)this.type; } }

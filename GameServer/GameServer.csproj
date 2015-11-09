@@ -183,6 +183,7 @@
     <Compile Include="DataEntities\Weapon.cs" />
     <Compile Include="Controllers\CodeController.cs" />
     <Compile Include="GameLogic\CellTypesEnum.cs" />
+    <Compile Include="GameLogic\JSClasses\CellRepair.cs" />
     <Compile Include="GameLogic\Radar.cs" />
     <Compile Include="Infrastructure\SecurityHelper.cs" />
     <Compile Include="JSONConverters\CellJsonConverter.cs" />
@@ -216,6 +217,7 @@
     <Content Include="Content\img\shipBackground.png" />
     <Content Include="Content\img\shipLayout.png" />
     <Content Include="Content\img\systemEngine.png" />
+    <Content Include="Content\img\systemRepair.png" />
     <Content Include="Content\img\systemWeapon.png" />
     <Content Include="Content\img\weapon0.png" />
     <Content Include="Content\js\jquery.easing.1.3.js" />

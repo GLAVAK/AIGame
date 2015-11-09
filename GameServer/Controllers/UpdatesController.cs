@@ -43,6 +43,8 @@ namespace GameServer.Controllers
                 result.RadarData = currentUser.enemyShip.status;
             }
 
+            result.IsDead = currentUser.IsDead;
+
             return result;
         }
     }
