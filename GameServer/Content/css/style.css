@@ -91,6 +91,7 @@ body
     position: absolute;
     z-index: 100;
     right: 30px;
+    top: 10px;
 }
 
 #hexMenu .row2
