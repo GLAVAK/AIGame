@@ -13,6 +13,7 @@ namespace GameServer.Models.ResponseData
         public object RadarData { get; set; }
 
         public bool IsDead { get; set; }
+        public int Credits { get; set; }
 
         public UpdateData()
         {

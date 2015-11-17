@@ -296,6 +296,10 @@ function getUpdates()
 				$('#consoleWindow div').append('<p class="'+classes+'"">'+data.Log[i]+"</p>");
 			}
 
+			$('#credits').text(data.Credits);
+			if(data.Credits<0) $('#apologie').show();
+			else $('#apologie').hide();
+
 			if(data.IsDead)
 			{
 				$('#deadMessage').show();

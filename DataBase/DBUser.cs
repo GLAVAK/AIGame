@@ -21,6 +21,8 @@ namespace DataBase
         public bool IsDead { get; set; }
 
         public int ShipPresetId { get; set; }
+
+        public int Credits { get; set; }
         
         public string CellTypesString { get; set; }
         public int[] CellTypes

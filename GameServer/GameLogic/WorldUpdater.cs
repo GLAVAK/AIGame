@@ -42,7 +42,16 @@ namespace GameServer.GameLogic
 
             foreach (User user in repository.Users)
             {
-                if (user.ship.IsBroken()) user.IsDead = true;
+                if (user.ship.IsBroken())
+                {
+                    user.IsDead = true;
+                    if (user.enemyShip != null)
+                    {
+                        user.enemyShip.owner.enemyShip = null;
+                        user.enemyShip.owner.Credits += 10;
+                    }
+                    user.enemyShip = null;
+                }
             }
         }
     }

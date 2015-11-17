@@ -44,6 +44,7 @@ namespace GameServer.Controllers
             }
 
             result.IsDead = currentUser.IsDead;
+            result.Credits = currentUser.Credits;
 
             return result;
         }

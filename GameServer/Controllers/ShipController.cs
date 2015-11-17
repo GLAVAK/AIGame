@@ -37,6 +37,8 @@ namespace GameServer.Controllers
 
             currentUser.ship.Repair();
 
+            currentUser.Credits--;
+
             return true;
         }
 

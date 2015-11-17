@@ -39,6 +39,17 @@ namespace GameServer.DataEntities
         }
         private string _passwordHash;
 
+        public int Credits
+        {
+            get { return _credits; }
+            set
+            {
+                _credits = value;
+                if (dbEntry != null) dbEntry.Credits = value;
+            }
+        }
+        private int _credits;
+
         public bool IsDead
         {
             get { return _isDead; }
