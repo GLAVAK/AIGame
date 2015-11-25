@@ -51,6 +51,10 @@ namespace GameServer.GameLogic
                         user.enemyShip.owner.Credits += 10;
                     }
                     user.enemyShip = null;
+
+                    // TODD: delegate space station creation to something else
+                    SpaceStation station = new SpaceStation();
+                    user.spaceStation = station;
                 }
             }
         }

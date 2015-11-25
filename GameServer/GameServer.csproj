@@ -172,6 +172,7 @@
     <Compile Include="Concrete\PresetShipRepository.cs" />
     <Compile Include="Concrete\ShipBuilder.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SpaceStationController.cs" />
     <Compile Include="Controllers\ShipController.cs" />
     <Compile Include="Controllers\StaticPageController.cs" />
     <Compile Include="Controllers\UpdatesController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="GameLogic\CellTypesEnum.cs" />
     <Compile Include="GameLogic\JSClasses\CellRepair.cs" />
     <Compile Include="GameLogic\Radar.cs" />
+    <Compile Include="GameLogic\SpaceStation.cs" />
     <Compile Include="Infrastructure\SecurityHelper.cs" />
     <Compile Include="JSONConverters\CellJsonConverter.cs" />
     <Compile Include="GameLogic\JSClasses\CellEngine.cs" />
@@ -216,6 +218,7 @@
     <Content Include="Content\img\runButton.png" />
     <Content Include="Content\img\shipBackground.png" />
     <Content Include="Content\img\shipLayout.png" />
+    <Content Include="Content\img\spaceStation.png" />
     <Content Include="Content\img\systemEngine.png" />
     <Content Include="Content\img\systemRepair.png" />
     <Content Include="Content\img\systemWeapon.png" />

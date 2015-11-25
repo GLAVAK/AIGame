@@ -319,10 +319,16 @@ function updateRadar(radarType)
 	{
 		case 0:
 			$('#enemyShip').fadeOut();
-			$('#radarWindow h4').text("No data");
+			$('#spaceStation').fadeOut();
+			$('#radarWindow h4').html("<span>No data</span>");
 			break;
 		case 1:
+			$('#spaceStation').fadeOut();
 			loadShip(false);
+			break;
+		case 2:
+			$('#enemyShip').fadeOut();
+			loadSpaceStation();
 			break;
 	}
 
@@ -342,7 +348,7 @@ function loadShip(yourShip)
 
 			if(yourShip && data.isDead)
 			{
-				
+				$('#deadMessage').show();
 			}
 
 		    so.background = "/content/img/shipBackground.png";
@@ -371,10 +377,34 @@ function loadShip(yourShip)
 
 			$("#"+so.elementId).fadeIn();
 
-			if(!yourShip) $('#radarWindow h4').text(data.owner);
+			if(!yourShip) $('#radarWindow h4').html("<span>Enemy</span>"+data.owner);
 		},
 		error: function () { terminate(); }
 	})
+}
+
+function loadSpaceStation()
+{
+	$.ajax({
+		url: "/api/spaceStation/",
+		type: "GET",
+		success: function (data){
+			if(data == null) return;
+
+		    var image = "/content/img/"+data.ImageFilename+".png";
+			$("#spaceStation .background").attr("src", image);
+			$("#spaceStation .background").one("load", function() {
+				$("#spaceStation").css({
+					"margin-left": -$("#spaceStation .background").width()/2+"px"
+					,"margin-top": -$("#spaceStation .background").height()/2+"px"
+				});
+			});
+
+			$('#spaceStation').fadeIn();
+
+			$('#radarWindow h4').html("<span>Space station</span>");
+		}
+	});
 }
 
 function updateRoomSystems(yourShip)

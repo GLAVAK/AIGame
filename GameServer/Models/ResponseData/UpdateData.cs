@@ -24,6 +24,7 @@ namespace GameServer.Models.ResponseData
     public enum RadarType
     {
         Nothing = 0,
-        EnemyShip = 1
+        EnemyShip = 1,
+        SpaceStation = 2
     }
 }

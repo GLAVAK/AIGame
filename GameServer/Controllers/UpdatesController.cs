@@ -37,10 +37,15 @@ namespace GameServer.Controllers
             currentUser.Log.CopyTo((string[])result.Log);
             currentUser.Log.Clear();
 
-            if(currentUser.enemyShip != null)
+            if (currentUser.enemyShip != null)
             {
                 result.RadarType = RadarType.EnemyShip;
                 result.RadarData = currentUser.enemyShip.status;
+            }
+            else if (currentUser.spaceStation != null)
+            {
+                result.RadarType = RadarType.SpaceStation;
+                result.RadarData = currentUser.spaceStation;
             }
 
             result.IsDead = currentUser.IsDead;

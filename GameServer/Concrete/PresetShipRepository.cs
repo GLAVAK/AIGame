@@ -31,7 +31,7 @@ namespace GameServer.Concrete
                 {0,0,0,3,0,0,0}
             };
 
-            preset.DefaultLayout = new int []{ 0, 2, 1, 3, 1, 2 };
+            preset.DefaultLayout = new int []{ 0, 2, 4, 3, 1, 2 };
 
             /*preset.afterShipBuilt = (ship =>
                 ((CellWeapon)ship.cells[0][5]).weaponId =

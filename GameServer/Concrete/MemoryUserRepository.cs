@@ -87,6 +87,7 @@ namespace GameServer.Concrete
             user.Login = dbUser.Username;
             user.PasswordHash = dbUser.PasswordHash;
             user.Code = dbUser.Code;
+            user.Credits = dbUser.Credits;
             user.ship = ship;
             _users.Add(user);
         }

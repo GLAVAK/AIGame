@@ -1,7 +1,10 @@
-﻿using GameServer.GameLogic.JSClasses;
+﻿using GameServer.Abstract;
+using GameServer.GameLogic;
+using GameServer.GameLogic.JSClasses;
 using GameServer.JSONConverters;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace GameServer.DataEntities
 {
@@ -46,6 +49,42 @@ namespace GameServer.DataEntities
             if (energyRemain < amount) throw new Exception("You ship have not enough energy");
 
             energyRemain -= amount;
+        }
+
+        public void Jump(IUserRepository repository)
+        {
+            owner.Events.Add(new Event("jump", new string[] { }));
+
+            // Clear connection with previous enemy or station
+            if (owner.enemyShip != null)
+            {
+                owner.enemyShip.owner.enemyShip = null;
+                owner.enemyShip = null;
+            }
+            else if (owner.spaceStation != null)
+            {
+                owner.spaceStation = null;
+            }
+
+            // Found another enemy, with some chance
+            User nextEnemy;
+            Random r = new Random();
+            if (r.NextDouble() <= 0.3)
+            {
+                nextEnemy = repository.Users.ToList()[r.Next(repository.Users.Count())];
+                if (nextEnemy.enemyShip == null && nextEnemy.spaceStation == null && nextEnemy != owner)
+                {
+                    nextEnemy.enemyShip = this;
+                    this.owner.enemyShip = nextEnemy.ship;
+                }
+            }
+            // Else, with some chance, jump to the space station
+            else if (r.NextDouble() <= 0.3)
+            {
+                // TODD: delegate space station creation to something else
+                SpaceStation station = new SpaceStation();
+                owner.spaceStation = station;
+            }
         }
 
         public bool IsBroken()

@@ -27,6 +27,7 @@ namespace GameServer.GameLogic
             get
             {
                 if (owner.enemyShip != null) return 1;
+                else if (owner.spaceStation != null) return 2;
                 else return 0;
             }
         }

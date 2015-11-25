@@ -19,7 +19,7 @@ body
 	height: 100%;
 }
 
-#ship, #enemyShip
+#ship, #enemyShip, #spaceStation
 {
 	padding: 0;
 
@@ -28,7 +28,7 @@ body
 	left: 50%;
 }
 
-#ship img, #enemyShip img, .weaponContainer
+#ship img, #enemyShip img, #spaceStation img, .weaponContainer
 {
 	position: absolute;
 	margin: 0;
@@ -175,7 +175,17 @@ input, button
 	margin: 0 8px;
 	padding: 1px;
 
+	font-weight: normal;
+
 	text-align: center;
+}
+
+.window h4 span
+{
+	color: #6a6d5d;
+
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 #toolTip

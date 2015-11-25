@@ -1,5 +1,6 @@
 ﻿using DataBase;
 using GameServer.Abstract;
+using GameServer.GameLogic;
 using GameServer.GameLogic.JSClasses;
 using Jurassic;
 using Jurassic.Library;
@@ -86,25 +87,19 @@ namespace GameServer.DataEntities
             set
             {
                 _enemyShip = value;
-
-                //Form array of Cells to be used in JavaScript
-                /*ArrayInstance[] array = new ArrayInstance[ship.cells.Length];
-                for (int i = 0; i < array.Length; i++)
-                {
-                    array[i] = engine.Array.New(ship.cells[i]);
-
-                    for (int j = 0; j < ship.cells[i].Length; j++)
-                    {
-                        if (ship.cells[i][j] is CellEngine)
-                        {
-                            ((CellEngine)ship.cells[i][j]).repository = repository;
-                        }
-                    }
-                }
-                engine.SetGlobalValue("enemyCells", engine.Array.New(array));*/
             }
         }
         private Ship _enemyShip;
+
+        public SpaceStation spaceStation
+        {
+            get { return _spaceStation; }
+            set
+            {
+                _spaceStation = value;
+            }
+        }
+        private SpaceStation _spaceStation;
 
         public List<Event> Events = new List<Event>();
 
