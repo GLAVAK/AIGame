@@ -13,7 +13,7 @@ for(var i = 0; i < radar.getWidth(); i++)
 var engine = cells[1][4];
 
 engine.power(1);
-if(radar.type == 0)
+if(radar.type != 1)
     engine.jump();
 //-------------------------------------------
 
@@ -23,10 +23,10 @@ var repairCell = cells[1][2];
 repairCell.power(1);
 for(var i = 0; i < 3; i++)
     for(var j = 0; j < 7; j++)
-    	if(cells[i][j].health < 10)
-    	{
-    		repairCell.repair(j, i);
-    	}
+        if(cells[i][j].health < 10)
+        {
+            repairCell.repair(j, i);
+        }
 //-------------------------------------------
 
 // D3str0y3r 1337:

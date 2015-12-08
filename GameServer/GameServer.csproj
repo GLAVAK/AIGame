@@ -216,8 +216,11 @@
     <Content Include="Content\img\messageBackground.png" />
     <Content Include="Content\img\missile.png" />
     <Content Include="Content\img\runButton.png" />
-    <Content Include="Content\img\shipBackground.png" />
-    <Content Include="Content\img\shipLayout.png" />
+    <Content Include="Content\img\shipBackground1.png" />
+    <Content Include="Content\img\shipBackground2.png" />
+    <Content Include="Content\img\shipEditorFrame.png" />
+    <Content Include="Content\img\shipLayout1.png" />
+    <Content Include="Content\img\shipLayout2.png" />
     <Content Include="Content\img\spaceStation.png" />
     <Content Include="Content\img\systemEngine.png" />
     <Content Include="Content\img\systemRepair.png" />

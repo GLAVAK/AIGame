@@ -22,6 +22,12 @@ namespace GameServer.JSONConverters
             writer.WritePropertyName("layoutOffset");
             serializer.Serialize(writer, ship.preset.LayoutOffset);
 
+            writer.WritePropertyName("imageFilename");
+            serializer.Serialize(writer, ship.preset.ImageFilename);
+
+            writer.WritePropertyName("layoutFilename");
+            serializer.Serialize(writer, ship.preset.LayoutFilename);
+
             writer.WritePropertyName("weapons");
             serializer.Serialize(writer, ship.preset.weapons);
 

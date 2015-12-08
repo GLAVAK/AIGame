@@ -28,18 +28,22 @@
 
 <body>
 
-<div id="stats">
+<div id="stats" style="display:none">
     <p>Credits: <span id="credits"></span><i id="apologie" style="display:none">Yes, negative credits, but it's only for now</i></p>
 </div>
 
+<div id="testAccounts" style="color:white">Accounts for test: Ggg1/123321, Ggg2/123321</div>
+
 <div id="hexMenu">
     <div class="row1">
+        <a href="#" id="buttonShipEditor" class="hexButton spaceStationVisible" title="Upgrade Ship" style="display:none;"><i class="fa fa-wrench"></i></a>
         <a href="#" id="buttonCodeEditor" class="hexButton" title="Code editor"><i class="fa fa-code"></i></a>
         <a href="#" id="buttonRadar" class="hexButton" title="Radar"><i class="fa fa-wifi"></i></a>
         <a href="/" class="hexButton" title="Log out"><i class="fa fa-sign-out"></i></a>
     </div>
     <div style="clear:both"></div>
     <div class="row2">
+        <a href="#" class="hexButton spaceStationVisible" style="visibility:hidden;display:none;"></a><!-- placeholder -->
         <a href="https://docs.google.com/document/d/1ROT6bvene-Qw0jku_59dtbfnR2BZYw8XV_Wjv-2FNww/edit?usp=sharing" target="_blank" class="hexButton" title="Help"><i class="fa fa-question"></i></a>
         <a href="#" id="buttonConsole" class="hexButton" title="Console"><i class="fa fa-terminal"></i></a>
     </div>
@@ -54,6 +58,9 @@
     <div class="roomSystemsContainer"></div>
     
     <div class="incomingContainer"></div>
+
+    <img class="shipEditorMode" id="shipEditorFrame" src="~/Content/img/shipEditorFrame.png" style="display:none;">
+    <a href="#" class="shipEditorMode" style="display:none;">save</a>
 </div>
 
 <div id="message">

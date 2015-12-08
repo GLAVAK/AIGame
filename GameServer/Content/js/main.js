@@ -17,9 +17,9 @@ $(document).ready(function (){
 	});
 
 	$('#codeEditorWindow textarea').on('keydown', function (e) {
-	    var keyCode = e.keyCode || e.which;
+		var keyCode = e.keyCode || e.which;
 
-	    if (keyCode === 9) {
+		if (keyCode === 9) {
 			e.preventDefault();
 			var start = this.selectionStart;
 			var end = this.selectionEnd;
@@ -30,7 +30,7 @@ $(document).ready(function (){
 			this.value = val.substring(0, start) + selected.replace(re, '    ') + val.substring(end);
 			this.selectionStart = end + 4;
 			this.selectionEnd = end + 4;
-	    }
+		}
 	});
 
 	$('.shipLayout').mousemove(function(event) {
@@ -159,6 +159,10 @@ $(document).ready(function (){
 
 function setUpTaskBar()
 {
+	$('#buttonShipEditor').click(function (){
+		//enableShipEditor();
+		return false;
+	});
 	$('#buttonCodeEditor').click(function (){
 		toggleWindow('#codeEditorWindow');
 		return false;
@@ -171,6 +175,17 @@ function setUpTaskBar()
 		toggleWindow('#consoleWindow');
 		return false;
 	});
+}
+
+function enableShipEditor()
+{
+	if($('#shipEditorFrame').is(':visible')) return;
+
+	$('#shipEditorFrame').css({
+			"margin-left": -parseInt($("#ship").css("margin-left"))-$("#shipEditorFrame").width()/2+"px",
+			"margin-top": -parseInt($("#ship").css("margin-top"))-$("#shipEditorFrame").height()/2+"px"
+		});
+	$('.shipEditorMode').show();
 }
 
 function toggleWindow(windowId)
@@ -190,9 +205,9 @@ function toggleWindow(windowId)
 
 function startGame()
 {
-	$('#ship, #codeEditorWindow, #radarWindow').show();
+	$('#ship, #codeEditorWindow, #radarWindow, #stats').show();
 	$('#message').hide();
-	$('#register').remove();
+	$('#register, #testAccounts').remove();
 	loadShip(true);
 	loadShip(false);
 
@@ -226,12 +241,12 @@ function getUpdates()
 		type: "GET",
 		success: function (data){
 			for (var i = 0; i < data.Events.length; i++) {
-			    switch (data.Events[i].type)
+				switch (data.Events[i].type)
 				{
 					case "shoot":
 						coordsFrom = [
-                            shipObject.weapons[data.Events[i].data[2]].position[0],
-                            shipObject.weapons[data.Events[i].data[2]].position[1]
+							shipObject.weapons[data.Events[i].data[2]].position[0],
+							shipObject.weapons[data.Events[i].data[2]].position[1]
 						];
 						coordsTo = [
 							Number(data.Events[i].data[0])*35+17 + shipObject.layoutOffset[0],
@@ -242,8 +257,8 @@ function getUpdates()
 						break;
 					case "shootIncoming":
 						coordsFrom = [
-                            enemyShipObject.weapons[data.Events[i].data[2]].position[0],
-                            enemyShipObject.weapons[data.Events[i].data[2]].position[1]
+							enemyShipObject.weapons[data.Events[i].data[2]].position[0],
+							enemyShipObject.weapons[data.Events[i].data[2]].position[1]
 						];
 						coordsTo = [
 							Number(data.Events[i].data[0])*35+17 + enemyShipObject.layoutOffset[0],
@@ -261,11 +276,11 @@ function getUpdates()
 			}
 
 			for (var i = 0; i < data.ShipStatus.length; i++) {
-			    for (var j = 0; j < data.ShipStatus[i].length; j++) {
-			 		shipObject.layout[i][j].health = data.ShipStatus[i][j].health;
-			        shipObject.layout[i][j].energy = data.ShipStatus[i][j].energy;
-			        shipObject.layout[i][j].stepsToReady = data.ShipStatus[i][j].stepsToReady;
-			    }
+				for (var j = 0; j < data.ShipStatus[i].length; j++) {
+					shipObject.layout[i][j].health = data.ShipStatus[i][j].health;
+					shipObject.layout[i][j].energy = data.ShipStatus[i][j].energy;
+					shipObject.layout[i][j].stepsToReady = data.ShipStatus[i][j].stepsToReady;
+				}
 			}
 
 			if(currentRadarObject != data.RadarType)
@@ -276,11 +291,11 @@ function getUpdates()
 				{
 					case 1:
 						for (var i = 0; i < data.RadarData.length; i++) {
-						    for (var j = 0; j < data.RadarData[i].length; j++) {
-						 		enemyShipObject.layout[i][j].health = data.RadarData[i][j].health;
-						        enemyShipObject.layout[i][j].energy = data.RadarData[i][j].energy;
-						        enemyShipObject.layout[i][j].stepsToReady = data.RadarData[i][j].stepsToReady;
-						    }
+							for (var j = 0; j < data.RadarData[i].length; j++) {
+								enemyShipObject.layout[i][j].health = data.RadarData[i][j].health;
+								enemyShipObject.layout[i][j].energy = data.RadarData[i][j].energy;
+								enemyShipObject.layout[i][j].stepsToReady = data.RadarData[i][j].stepsToReady;
+							}
 						}
 						break;
 				}
@@ -315,19 +330,26 @@ function getUpdates()
 
 function updateRadar(radarType)
 {
+	switch(currentRadarObject)
+	{
+		case 1:
+			$('#enemyShip').fadeOut();
+			break;
+		case 2:
+			$('#spaceStation').fadeOut();
+			$('.spaceStationVisible').fadeOut();
+			break;
+	}
+
 	switch(radarType)
 	{
 		case 0:
-			$('#enemyShip').fadeOut();
-			$('#spaceStation').fadeOut();
 			$('#radarWindow h4').html("<span>No data</span>");
 			break;
 		case 1:
-			$('#spaceStation').fadeOut();
 			loadShip(false);
 			break;
 		case 2:
-			$('#enemyShip').fadeOut();
 			loadSpaceStation();
 			break;
 	}
@@ -351,8 +373,8 @@ function loadShip(yourShip)
 				$('#deadMessage').show();
 			}
 
-		    so.background = "/content/img/shipBackground.png";
-			so.layoutImage = "/content/img/shipLayout.png";
+			so.background = data.imageFilename;
+			so.layoutImage = data.layoutFilename;
 
 			$("#"+so.elementId+" .shipBackground").attr("src", so.background);
 			$("#"+so.elementId+" .shipBackground").one("load", function() {
@@ -391,7 +413,7 @@ function loadSpaceStation()
 		success: function (data){
 			if(data == null) return;
 
-		    var image = "/content/img/"+data.ImageFilename+".png";
+			var image = "/content/img/"+data.ImageFilename+".png";
 			$("#spaceStation .background").attr("src", image);
 			$("#spaceStation .background").one("load", function() {
 				$("#spaceStation").css({
@@ -401,6 +423,7 @@ function loadSpaceStation()
 			});
 
 			$('#spaceStation').fadeIn();
+			$('.spaceStationVisible').fadeIn();
 
 			$('#radarWindow h4').html("<span>Space station</span>");
 		}

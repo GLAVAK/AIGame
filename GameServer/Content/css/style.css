@@ -42,6 +42,11 @@ body
 	pointer-events: none;
 }
 
+a.shipEditorMode
+{
+	color: white;
+}
+
 .window, #message, .message
 {
 	background: url("../img/codeEditorBackground.png");
@@ -98,6 +103,11 @@ body
 #stats p
 {
 	margin: 0;
+}
+
+#credits
+{
+	font-weight: bold;
 }
 
 #stats i
